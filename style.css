@@ -5,8 +5,8 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--
 .nav-inner{max-width:860px;margin:0 auto;padding:0 16px 0 24px;display:flex;align-items:center;gap:12px}
 .nw{flex:1;min-width:0;margin:0;padding:12px 0;display:flex;gap:18px;overflow-x:auto;white-space:nowrap;font:700 11px var(--fs);letter-spacing:.14em;text-transform:uppercase}
 nav a{text-decoration:none;color:var(--ink)}nav a:hover,nav a:focus-visible{color:var(--o);outline:0}
-.download{flex:none;border:0;background:var(--o);color:#fff;padding:9px 12px;font:700 10px var(--fs);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-.download:hover,.download:focus-visible{background:var(--nv);outline:2px solid var(--ink);outline-offset:2px}
+.download{flex:none;border:0;background:var(--o);color:#fff;padding:9px 12px;font:700 10px var(--fs);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;line-height:1}
+.download:hover,.download:focus-visible{background:var(--nv);color:#fff;outline:2px solid var(--ink);outline-offset:2px}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
 .cover,.page{max-width:860px;margin:0 auto}
 .cover{position:relative}.cover .bg{display:block;width:100%;height:auto}
@@ -56,6 +56,7 @@ figcaption b{display:block;font:800 14px/1.2 var(--fd);text-transform:uppercase;
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @page{size:A4 portrait;margin:0}
 @media print{
+  @page{size:A4 portrait;margin:0}
   *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   html,body{width:210mm;margin:0;padding:0!important;background:var(--bg)!important;color:var(--ink)!important}
   nav,body::before{display:none!important}

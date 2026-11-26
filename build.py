@@ -85,8 +85,21 @@ ed=''.join(f'<div class="ed e{len(c)}">{im(p19_strips[k],"Bharat Mahotsav editio
 P.append(page("editions","BHARAT MAHOTSAV",f'''<div class="ctr">{im("p19_00","Bharat Mahotsav","lg1")}<p class="lead big2">One India. One Vision. One Future.</p><i class="bar mid"></i></div>{ed}''',"Bharat Mahotsav","19",True))
 P.append(page("contact","FEB 2027",f'''{h("Our","Associates","h1")}{im("box20","Our associates","box18")}<div class="ctr"><p class="cd">Come. <span class="o">Discover Bharat.</span></p><i class="bar mid"></i><p>cr@bharatmahotsav.net</p><p>www.bharatmahotsavfestivals.com</p><p><b>London, United Kingdom · Feb 2027</b></p></div>{im("big20","London","strip")}''',"","20"))
 css=open("style.css").read().replace("BRIDGE",u("p02_00")).replace("BCLOGO",u("bc"))
-nav='<nav><div class="nav-inner"><div class="nw"><a href="#top">Cover</a><a href="#itinerary">Itinerary</a><a href="#about">About</a><a href="#showcase">Startup Showcase</a><a href="#why">Why Participate</a><a href="#partners">Partners</a><a href="#airwalks">Airwalks</a><a href="#guests">Guests</a><a href="#awardees">Awardees</a><a href="#cultural">Cultural</a><a href="#media">Media</a><a href="#legacy">Legacy</a><a href="#contact">Contact</a></div><button class="download" type="button" onclick="window.print()">Download PDF</button></div></nav>'
+nav_dl='<a class="download" href="bharat-connect-london-2027.pdf" download="Bharat-Connect-London-2027.pdf" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download PDF</a>'
+nav=f'<nav><div class="nav-inner"><div class="nw"><a href="#top">Cover</a><a href="#itinerary">Itinerary</a><a href="#about">About</a><a href="#showcase">Startup Showcase</a><a href="#why">Why Participate</a><a href="#partners">Partners</a><a href="#airwalks">Airwalks</a><a href="#guests">Guests</a><a href="#awardees">Awardees</a><a href="#cultural">Cultural</a><a href="#media">Media</a><a href="#legacy">Legacy</a><a href="#contact">Contact</a></div>{nav_dl}</div></nav>'
 html=f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Bharat Connect · London 19–22 February 2027</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"><style>{css}</style></head><body>{nav}{"".join(P)}</body></html>'
 open(os.path.join(os.path.dirname(__file__),"index.html"),"w",encoding="utf-8").write(html)
 open(os.path.join(os.path.dirname(__file__),"bharat-connect.html"),"w",encoding="utf-8").write(html)
 print(len(html)/1e6,"MB")
+import subprocess
+chrome = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+pdf_out = os.path.join(os.path.dirname(__file__), "bharat-connect-london-2027.pdf")
+idx_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html")).replace("\\", "/")
+if os.path.exists(chrome):
+    subprocess.run([
+        chrome, "--headless=new", "--disable-gpu",
+        f"--print-to-pdf={pdf_out}", "--no-pdf-header-footer",
+        f"file:///{idx_path}"
+    ], timeout=35)
+    if os.path.exists(pdf_out):
+        print("Compiled PDF:", os.path.getsize(pdf_out)/1e6, "MB")
